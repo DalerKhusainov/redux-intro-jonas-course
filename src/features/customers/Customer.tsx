@@ -1,5 +1,12 @@
+import { useSelector } from "react-redux";
+import type { RootState } from "../../app/store";
+
 function Customer() {
-  return <h2>👋 Welcome, %NAME%</h2>;
+  const customerFullName = useSelector(
+    (state: RootState) => state.customer.fullName
+  );
+
+  return <h2>👋 Welcome, {customerFullName}</h2>;
 }
 
 export default Customer;
