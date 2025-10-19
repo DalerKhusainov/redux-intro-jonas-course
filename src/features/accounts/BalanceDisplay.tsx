@@ -1,4 +1,5 @@
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
+import { connect } from "react-redux";
 import type { RootState } from "../../app/store";
 
 function formatCurrency(value: number) {
@@ -8,15 +9,24 @@ function formatCurrency(value: number) {
   }).format(value);
 }
 
-function BalanceDisplay() {
-  const accountBalance = useSelector(
-    (state: RootState) => state.account.balance
-  );
+function BalanceDisplay({ balance }: { balance: number }) {
+  // function BalanceDisplay() {
+  // const accountBalance = useSelector(
+  //   (state: RootState) => state.account.balance
+  // );
 
-  return <div className="balance">{formatCurrency(accountBalance)}</div>;
+  return <div className="balance">{formatCurrency(balance)}</div>;
+  // return <div className="balance">{formatCurrency(accountBalance)}</div>;
 }
 
-export default BalanceDisplay;
+function mapStateToProps(state: RootState) {
+  return {
+    balance: state.account.balance,
+  };
+}
+
+// export default BalanceDisplay;
+export default connect(mapStateToProps)(BalanceDisplay);
 
 //////// STARTER ///////////
 ////////////////////////////
